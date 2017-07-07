@@ -1,0 +1,25 @@
+<ul>
+  {% for user in object_list %}
+    <li class="user">{{ user }} 
+
+    
+{% if user.last_name == '1'%}
+       <form>
+  <input type = "radio" checked name="type" value= "1">Admin <input type = "radio" name="type" value= "2">Teacher <input type = "radio" name="type" value= "3">Student  <input type ="submit" value="update"></form>
+
+ {%  elif user.last_name == '2'%}
+  <form>
+<input type = "radio"  name="type" value= "1">Admin <input type = "radio" checked name="type" value= "2">Teacher<input type = "radio" name="type" value= "3">Student <input type ="submit" value="update">
+</form>
+{%  else %}
+<form>
+<input type = "radio"  name="type" value= "1">Admin <input type = "radio"  name="type" value= "2">Teacher<input type = "radio" checked name="type" value= "3">Student <input type ="submit" value="update">
+</form>
+ {% endif %}
+
+
+  {% endfor %}
+</ul>
+
+
+ <a href="{% url "server_delete" server.id %}">delete</a>

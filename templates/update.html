@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>chat</title>
+ {% load staticfiles %}
+ <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href='{%static "css/app.css" %}'/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+<body style="background-image:none; background-color:whitesmoke">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#333 !important">
+
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="color:white " href="#">Functions</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      <ul class="nav navbar-nav navbar-right">
+     
+	  <li> {% if user.is_authenticated %}
+      <a href="#">  {{ user.username }}</a></li>
+     <li>  <a href="{% url 'logout' %}"> logout</a></li>
+       {% else %}
+	   
+	   <li><a href="/register">Signup <i class="fa fa-user-plus"></i></a></li>
+       <li><a href="{% url 'login' %}">Login <i class="fa fa-user"></i></a></li>
+       {% endif %}
+	   
+	   </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<ul>
+    {% for user in object_list %}
+	    
+    <li>
+	    <a href="{% url 'user_edit' user.id %}">{{user}}</a>  <br>
+		{% if user.profile.utype == '1'%} 
+             		<li style="color:red">Admin </li>
+		{% endif %}
+        {% if user.profile.utype == '2'%} 
+             		<li style="color:red">Teacher </li>
+		{% endif %}
+		{% if user.profile.utype == '3'%} 
+             		<li style="color:red">Student </li>
+		{% endif %}
+		
+	
+		
+   
+
+    
+	 <hr>
+    </li>
+    {% endfor %}
+</ul> 
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </body>
+
+</html>
